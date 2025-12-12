@@ -1,0 +1,274 @@
+/*
+ * General Styles & Fonts
+ */
+body {
+    font-family: 'Open Sans', sans-serif; /* A clear, friendly font */
+    background-color: #e9ecef; /* Soft light grey background */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #343a40; /* Darker text for readability */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Color Variables */
+:root {
+    --primary-color: #343a40;   /* Deep Dark Grey (for header/accents) */
+    --accent-color: #00bcd4;    /* Vibrant Teal (for buttons/highlights) */
+    --delete-color: #dc3545;    /* Red */
+    --edit-color: #ffc107;      /* Yellow */
+}
+
+/*
+ * Header
+ */
+.title {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 30px 0;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    font-size: 2em;
+    font-weight: 300;
+}
+
+.container {
+    width: 95%;
+    max-width: 1400px; /* Even wider layout */
+    margin: 0 auto 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px; /* Increased spacing */
+    justify-content: center;
+}
+
+/*
+ * Form Card - Slimmer, Floating Design
+ */
+.form-card {
+    background: white;
+    padding: 35px;
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    flex: 1 1 350px;
+    max-width: 400px;
+    height: fit-content;
+    border: 1px solid #dee2e6;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.form-card:hover {
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-6px); 
+}
+
+.form-card h2 {
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 30px;
+    text-align: center;
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 10px;
+}
+
+.form-card label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.9em;
+}
+
+.form-card input[type="text"],
+.form-card input[type="email"],
+.form-card select {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 18px;
+    border: 1px solid #ced4da;
+    border-radius: 8px; /* Rounded inputs */
+    box-sizing: border-box;
+    background-color: #ffffff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-card input:focus,
+.form-card select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2);
+    outline: none;
+}
+
+/*
+ * Form Buttons
+ */
+.form-card button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
+    margin-top: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+.form-card button:hover {
+    background-color: #00a6b8;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.form-card button:active {
+    transform: scale(0.97); 
+}
+
+
+/*
+ * Unique Table Styles - Elevated and Structured
+ */
+.styled-table-wrapper {
+    flex: 2 1 800px;
+    overflow-x: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Rounded table wrapper */
+    background-color: white;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 0; 
+    font-size: 0.9em;
+    min-width: 100%;
+    width: 100%;
+    overflow: hidden; 
+}
+
+/* Table Header */
+.styled-table thead tr {
+    background-color: var(--primary-color); 
+    color: #f8f9fa;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 4px solid var(--accent-color); /* Strong accent line */
+}
+
+.styled-table th {
+    padding: 15px 20px;
+    letter-spacing: 0.8px;
+}
+
+/* Table Body */
+.styled-table td {
+    padding: 14px 20px;
+    border-right: 1px solid #f1f1f1;
+}
+
+/* Highlight important data (optional but unique) */
+.styled-table td:nth-child(1), /* ID column */
+.styled-table td:nth-child(8) /* Course column */
+{
+    font-weight: 600;
+    color: #495057;
+}
+
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.2s ease-out; 
+}
+
+/* Row Striping */
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f8f9fa;
+}
+
+/* Row Hover Effect */
+.styled-table tbody tr:hover {
+    background-color: #e3f2fd;
+    box-shadow: inset 4px 0 0 0 var(--accent-color); /* Stronger accent highlight */
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: none;
+}
+
+/*
+ * Action Buttons in Table
+ */
+.actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    min-width: 150px;
+}
+
+.btn-edit, .btn-delete {
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit {
+    background-color: var(--edit-color);
+    color: var(--primary-color);
+}
+
+.btn-edit:hover {
+    background-color: #f7b200;
+    transform: scale(1.03); 
+}
+
+.btn-delete {
+    background-color: var(--delete-color);
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #bd2130;
+    transform: scale(1.03); 
+}
+
+.btn-edit:active, .btn-delete:active {
+    transform: scale(0.95); 
+}
+
+
+/*
+ * Media Query for Responsiveness (Maintaining the fix for "teda")
+ */
+@media (max-width: 1100px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .form-card {
+        max-width: 90%; 
+        width: 100%;
+        margin-bottom: 0;
+    }
+    
+    .styled-table {
+        min-width: 1000px; /* Ensure wide scrolling view for tablet/mobile */
+    }
+}

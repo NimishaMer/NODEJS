@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student CRUD</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <h1 class="title">Student Management System</h1>
+
+
+    <div class="container">
+
+        <form action="/add-student" method="post" class="form-card">
+
+    <h2>Admissions: Enroll New Student</h2>
+
+    
+
+    <label>Id</label>
+    <input type="text" name="id" placeholder="e.g., S108" required>
+
+    <label>First Name</label>
+    <input type="text" name="first_name" placeholder="e.g., Ramesh" required>
+
+    <label>Last Name</label>
+    <input type="text" name="last_name" placeholder="e.g., Kumar" required>
+
+    <label>Email</label>
+    <input type="email" name="Email" placeholder="e.g., ramesh@example.com" required>
+
+    <label>Phone</label>
+    <input type="text" name="phone" placeholder="9876543210">
+
+    <label>Gender</label>
+    <select name="gender" required>
+        <option value="">Select gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+    </select>
+
+    <label>Department</label>
+    <select name="department" required>
+        <option value="">Select department</option>
+        <option>Computer Science</option>
+        <option>IT</option>
+        <option>Electronics</option>
+        <option>Mechanical</option>
+        <option>Management</option>
+    </select>
+
+    <label>Semester</label>
+    <select name="semester" required>
+        <option value="">Select semester</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+    </select>
+
+    <label>Course</label>
+    <select name="course" required>
+        <option value="">Select course</option>
+        <option>Full Stack Development</option>
+        <option>Frontend Development</option>
+        <option>Backend Development</option>
+        <option>UI/UX Design</option>
+    </select>
+
+    <button class="btn-add" type="submit">Complete Enrollment</button>
+</form>
+
+
+        <table class="styled-table">
+                <thead>
+                    <tr>
+                        
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Gender</th>
+                        <th>Department</th>
+                        <th>Semester</th>
+                        <th>Course</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% student.forEach(stu => { %>
+                    <tr>
+                        <td><%= stu.id %></td>
+                        <td><%= stu.first_name %> <%= stu.last_name %></td>
+                        <td><%= stu.Email %></td>
+                        <td><%= stu.phone %></td>
+                        <td><%= stu.gender %></td>
+                        <td><%= stu.department %></td>
+                        <td><%= stu.semester %></td>
+                        <td><%= stu.course %></td>
+
+                        <td class="actions">
+                            <a href="/edit-student/<%= stu.id %>" class="btn-edit">Edit</a>
+                            <a href="/delet-student/<%= stu.id %>" class="btn-delete">Delete</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+</body>
+
+</html>

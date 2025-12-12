@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <h1 class="title">Edit Student</h1>
+
+    <div class="container">
+
+        <form action="/update-student?studentID=<%= student.id %>" method="post" class="form-card">
+
+           
+
+            <label>Id</label>
+            <input type="text" name="id" value="<%= student.id %>" readonly>
+
+            <label>First Name</label>
+            <input type="text" name="first_name" value="<%= student.first_name %>" required>
+
+            <label>Last Name</label>
+            <input type="text" name="last_name" value="<%= student.last_name %>" required>
+
+            <label>Email</label>
+            <input type="email" name="Email" value="<%= student.Email %>" required>
+
+            <label>Phone</label>
+            <input type="text" name="phone" value="<%= student.phone %>">
+
+            <label>Gender</label>
+            <select name="gender">
+                <option <%=student.gender=="Male" ?"selected":"" %>>Male</option>
+                <option <%=student.gender=="Female" ?"selected":"" %>>Female</option>
+                <option <%=student.gender=="Other" ?"selected":"" %>>Other</option>
+            </select>
+
+            <label>Department</label>
+            <select name="department">
+                <option <%=student.department=="Computer Science" ?"selected":"" %>>Computer Science</option>
+                <option <%=student.department=="IT" ?"selected":"" %>>IT</option>
+                <option <%=student.department=="Electronics" ?"selected":"" %>>Electronics</option>
+                <option <%=student.department=="Mechanical" ?"selected":"" %>>Mechanical</option>
+                <option <%=student.department=="Management" ?"selected":"" %>>Management</option>
+            </select>
+
+            <label>Semester</label>
+            <select name="semester">
+                <option <%=student.semester=="1" ?"selected":"" %>>1</option>
+                <option <%=student.semester=="2" ?"selected":"" %>>2</option>
+                <option <%=student.semester=="3" ?"selected":"" %>>3</option>
+                <option <%=student.semester=="4" ?"selected":"" %>>4</option>
+                <option <%=student.semester=="5" ?"selected":"" %>>5</option>
+                <option <%=student.semester=="6" ?"selected":"" %>>6</option>
+                <option <%=student.semester=="7" ?"selected":"" %>>7</option>
+                <option <%=student.semester=="8" ?"selected":"" %>>8</option>
+            </select>
+
+            <label>Course</label>
+            <select name="course">
+                <option <%=student.course=="Full Stack Development" ?"selected":"" %>>Full Stack Development</option>
+                <option <%=student.course=="Frontend Development" ?"selected":"" %>>Frontend Development</option>
+                <option <%=student.course=="Backend Development" ?"selected":"" %>>Backend Development</option>
+                <option <%=student.course=="UI/UX Design" ?"selected":"" %>>UI/UX Design</option>
+            </select>
+            <button type="submit">Update Student</button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
