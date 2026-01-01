@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Movie - MovieHub</title>
+    <link rel="stylesheet" href="/css/add.movie.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <%- include('header.ejs') %>
+
+    <main class="add-movie-page">
+        <div class="page-header">
+            <div class="header-content">
+                <h1>Edit Movie</h1>
+                <p>Update your movie details and keep your collection fresh</p>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div class="form-card">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                    </div>
+                    <h2>Edit Movie Details</h2>
+                    <p>Modify the information about your movie</p>
+                </div>
+
+                <form action="/update-movie/<%=movie._id%>" method="post" enctype="multipart/form-data" class="movie-form">
+                    <div class="current-movie-preview">
+                        <img src="<%=movie.ProfileImage%>" alt="<%=movie.title%>" class="current-poster">
+                        <div class="current-info">
+                            <h3><%=movie.title%></h3>
+                            <p><%=movie.genre%> • <%=movie.year%> • ⭐ <%=movie.rating%></p>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="title">Movie Title *</label>
+                            <input type="text" id="title" name="title" value="<%=movie.title%>" placeholder="Enter movie title" required>
+                            <span class="input-helper">The official title of the movie</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="genre">Genre *</label>
+                            <select id="genre" name="genre" required>
+                                <option value="">-- Select Genre --</option>
+                                <option value="Action" <%=movie.genre==="Action" ? "selected" : "" %>>Action</option>
+                                <option value="Adventure" <%=movie.genre==="Adventure" ? "selected" : "" %>>Adventure</option>
+                                <option value="Comedy" <%=movie.genre==="Comedy" ? "selected" : "" %>>Comedy</option>
+                                <option value="Drama" <%=movie.genre==="Drama" ? "selected" : "" %>>Drama</option>
+                                <option value="Fantasy" <%=movie.genre==="Fantasy" ? "selected" : "" %>>Fantasy</option>
+                                <option value="Horror" <%=movie.genre==="Horror" ? "selected" : "" %>>Horror</option>
+                                <option value="Mystery" <%=movie.genre==="Mystery" ? "selected" : "" %>>Mystery</option>
+                                <option value="Romance" <%=movie.genre==="Romance" ? "selected" : "" %>>Romance</option>
+                                <option value="Sci-Fi" <%=movie.genre==="Sci-Fi" ? "selected" : "" %>>Sci-Fi</option>
+                                <option value="Thriller" <%=movie.genre==="Thriller" ? "selected" : "" %>>Thriller</option>
+                                <option value="Documentary" <%=movie.genre==="Documentary" ? "selected" : "" %>>Documentary</option>
+                            </select>
+                            <span class="input-helper">Choose the primary genre</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="year">Release Year *</label>
+                            <input type="text" id="year" name="year" value="<%=movie.year%>" maxlength="4" pattern="^(18[8-9][0-9]|19[0-9]{2}|20[0-2][0-9]|2025)$" placeholder="2025" required>
+                            <span class="input-helper">Year of release</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rating">Rating *</label>
+                            <select id="rating" name="rating" required>
+                                <option value="">-- Select Rating --</option>
+                                <option value="1" <%=movie.rating==1 ? "selected" : "" %>>⭐ 1 - Poor</option>
+                                <option value="2" <%=movie.rating==2 ? "selected" : "" %>>⭐⭐ 2 - Fair</option>
+                                <option value="3" <%=movie.rating==3 ? "selected" : "" %>>⭐⭐⭐ 3 - Good</option>
+                                <option value="4" <%=movie.rating==4 ? "selected" : "" %>>⭐⭐⭐⭐ 4 - Very Good</option>
+                                <option value="5" <%=movie.rating==5 ? "selected" : "" %>>⭐⭐⭐⭐⭐ 5 - Excellent</option>
+                            </select>
+                            <span class="input-helper">Your personal rating</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="description">Description *</label>
+                            <textarea id="description" name="description" rows="4" placeholder="Enter a brief description of the movie..." required><%= movie.description %></textarea>
+                            <span class="input-helper">Brief plot summary or movie description</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="ProfileImage">Update Movie Poster</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="ProfileImage" name="ProfileImage" accept="image/*">
+                                <div class="file-upload-label">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="17 8 12 3 7 8"></polyline>
+                                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                                    </svg>
+                                    <span>Choose new poster image (optional)</span>
+                                </div>
+                            </div>
+                            <span class="input-helper">Upload a new poster or leave empty to keep current</span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="window.history.back()">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn-submit">
+                            <span>Update Movie</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <%- include('footer.ejs') %>
+
+    <script>
+        // File upload preview
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('ProfileImage');
+            const fileLabel = document.querySelector('.file-upload-label');
+            const fileNameSpan = fileLabel.querySelector('span');
+            
+            // Handle file selection
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Update file name display
+                    fileNameSpan.textContent = file.name;
+                    
+                    // Create image preview
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Remove existing preview if any
+                        const existingPreview = fileLabel.querySelector('.image-preview');
+                        if (existingPreview) {
+                            existingPreview.remove();
+                        }
+                        
+                        // Create preview image
+                        const preview = document.createElement('div');
+                        preview.className = 'image-preview';
+                        preview.innerHTML = `
+                            <img src="${e.target.result}" alt="Preview" />
+                            <div class="preview-overlay">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2z"></path>
+                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                    <circle cx="13.5" cy="7.5" r="2.5"></circle>
+                                </svg>
+                                <span>Change Image</span>
+                            </div>
+                        `;
+                        
+                        // Clear the label content and add preview
+                        fileLabel.innerHTML = '';
+                        fileLabel.appendChild(preview);
+                        
+                        // Add click handler to preview for changing image
+                        preview.addEventListener('click', function() {
+                            fileInput.click();
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                    
+                    // Update label styling
+                    fileLabel.style.borderColor = '#e50914';
+                    fileLabel.style.background = 'rgba(229, 9, 20, 0.05)';
+                }
+            });
+            
+            // Handle click on the label to trigger file input
+            fileLabel.addEventListener('click', function(e) {
+                e.preventDefault();
+                fileInput.click();
+            });
+            
+            // Handle drag and drop
+            fileLabel.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                fileLabel.style.borderColor = '#e50914';
+                fileLabel.style.background = 'rgba(229, 9, 20, 0.1)';
+            });
+            
+            fileLabel.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                if (!fileLabel.querySelector('.image-preview')) {
+                    fileLabel.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                    fileLabel.style.background = 'rgba(42, 42, 42, 0.8)';
+                }
+            });
+            
+            fileLabel.addEventListener('drop', function(e) {
+                e.preventDefault();
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    fileInput.files = files;
+                    const event = new Event('change', { bubbles: true });
+                    fileInput.dispatchEvent(event);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

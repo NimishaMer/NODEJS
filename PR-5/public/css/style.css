@@ -1,0 +1,309 @@
+/* ===== GLOBAL RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: #141414;   /* Netflix dark background */
+    color: #ffffff;        /* White text */
+    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    padding: 20px 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+/* ===== LOGO ===== */
+.logo a {
+    font-size: 28px;
+    font-weight: 700;
+    color: #e50914; /* Netflix red */
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+/* ===== BUTTON WRAPPER ===== */
+.nav-btn {
+    display: flex;
+    align-items: center;
+}
+
+/* ===== ADD MOVIE BUTTON ===== */
+.add-movie-btn {
+    background: #e50914; /* Netflix red */
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+/* Hover Effect */
+.add-movie-btn:hover {
+    background: #f40612;
+    transform: scale(1.05);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .navbar {
+        padding: 14px 6%;
+    }
+
+    .logo a {
+        font-size: 20px;
+    }
+
+    .add-movie-btn {
+        padding: 9px 18px;
+        font-size: 13px;
+    }
+}
+
+
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: #141414;
+    margin-top: 80px;
+    padding: 60px 4% 20px;
+    border-top: 1px solid #333;
+    color: #ffffff;
+}
+
+/* Footer Content Layout */
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+/* Footer Section */
+.footer-section {
+    min-width: 0;
+}
+
+.footer-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #b3b3b3;
+    margin-bottom: 24px;
+    max-width: 300px;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 16px;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-link:hover {
+    background: #e50914;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+}
+
+.social-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Footer Links */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-link {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    padding-top: 30px;
+    border-top: 1px solid #333;
+    margin-top: 40px;
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-bottom-content p {
+    margin: 0;
+    font-size: 14px;
+    color: #757575;
+}
+
+.footer-legal {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+}
+
+.footer-legal a {
+    color: #757575;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+    color: #ffffff;
+}
+
+.footer-legal span {
+    color: #555;
+}
+
+/* Brand Highlight */
+.site-footer span {
+    color: #e50914;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 30px;
+    }
+    
+    .footer-section:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 40px 4% 20px;
+        margin-top: 60px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+    
+    .footer-section:first-child {
+        grid-column: 1;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .footer-legal {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-footer {
+        padding: 30px 3% 20px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .footer-title {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    
+    .footer-description {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+    
+    .social-links {
+        gap: 12px;
+    }
+    
+    .social-link {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .social-link svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .footer-link {
+        font-size: 13px;
+    }
+    
+    .footer-bottom-content p,
+    .footer-legal {
+        font-size: 12px;
+    }
+}
+
+
+
+

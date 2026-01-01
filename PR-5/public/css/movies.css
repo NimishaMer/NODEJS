@@ -1,0 +1,122 @@
+.movies-section {
+    max-width: 1400px;
+    margin: 60px auto;
+    padding: 0 4%;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: white;
+}
+
+/* GRID */
+.movie-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding-bottom: 20px;
+}
+
+.movie-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.movie-grid::-webkit-scrollbar-track {
+    background: #333;
+}
+
+.movie-grid::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 4px;
+}
+
+.movie-grid::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+/* CARD */
+.movie-card {
+    background: #1f1f1f;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-width: 220px;
+    position: relative;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+/* POSTER FIX */
+.movie-poster {
+    height: 330px;
+    background: #333;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* RATING */
+.movie-rating {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    color: #ffc107;
+}
+
+/* INFO */
+.movie-info {
+    padding: 20px;
+}
+
+.movie-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.movie-meta {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+.movie-genre {
+    display: inline-block;
+    font-size: 12px;
+    background: #333;
+    padding: 5px 12px;
+    border-radius: 20px;
+    color: #ccc;
+}
+
+/* BUTTON */
+.movie-btn {
+    display: block;
+    margin-top: 15px;
+    padding: 12px;
+    background: #e50914;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.movie-btn:hover {
+    background: #f40612;
+}
