@@ -1,0 +1,255 @@
+<%- include('../header') %>
+
+<style>
+    body {
+        background-color: #f8fafc;
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Search */
+    #blogSearch {
+        border-radius: 8px;
+        padding: 12px 14px;
+        font-size: 14px;
+        border: 1px solid #cbd5e1;
+    }
+
+    /* Filters */
+    #categoryFilter, #authorFilter {
+        border-radius: 8px;
+        padding: 14px 14px;
+        font-size: 14px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+    }
+
+    #categoryFilter:focus, #authorFilter:focus, #blogSearch:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    /* Card */
+    .blog-card {
+        background: #ffffff;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+        transition: all 0.25s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+    }
+
+    .blog-img {
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
+        background: #e5e7eb;
+    }
+
+    .blog-content {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .blog-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 8px;
+        line-height: 1.4;
+    }
+
+    .blog-meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+
+    .meta-chip {
+        font-size: 11.5px;
+        padding: 4px 10px;
+        border-radius: 20px;
+        background: #f1f5f9;
+        color: #475569;
+    }
+
+    .blog-desc {
+        font-size: 14px;
+        color: #334155;
+        line-height: 1.6;
+        margin-bottom: 14px;
+        flex-grow: 1;
+    }
+
+    /* Actions */
+    .blog-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .blog-actions a {
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 7px 16px;
+        border-radius: 6px;
+        transition: 0.2s ease;
+    }
+
+    .view-btn {
+        color: #2563eb;
+        border: 1px solid #2563eb;
+    }
+
+    .view-btn:hover {
+        background: #2563eb;
+        color: #fff;
+    }
+
+    .edit-btn {
+        color: #059669;
+        border: 1px solid #059669;
+    }
+
+    .edit-btn:hover {
+        background: #059669;
+        color: #fff;
+    }
+
+    .delete-btn {
+        color: #dc2626;
+        border: 1px solid #dc2626;
+    }
+
+    .delete-btn:hover {
+        background: #dc2626;
+        color: #fff;
+    }
+</style>
+
+<div class="page-wrapper">
+
+    <div class="page-breadcrumb text-center">
+        <h4 class="page-title">Blogs</h4>
+
+        <!-- Filters -->
+        <div class="row justify-content-center mt-4 mb-3">
+            <div class="col-md-3 mb-2">
+                <select id="categoryFilter" class="form-control h-100">
+                    <option value="">All Categories</option>
+                    <% const categories = [...new Set(blogs.map(blog => blog.category))]; %>
+                    <% categories.forEach(category => { %>
+                        <option value="<%= category.toLowerCase() %>"><%= category %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <div class="col-md-3 mb-2">
+                <select id="authorFilter" class="form-control h-100">
+                    <option value="">All Authors</option>
+                    <% const authors = [...new Set(blogs.map(blog => blog.author))]; %>
+                    <% authors.forEach(author => { %>
+                        <option value="<%= author.toLowerCase() %>"><%= author %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="blogSearch" class="form-control"
+                    placeholder="Search blogs...">
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <% blogs.forEach((blog)=> { %>
+            <div class="col-lg-4 col-md-6 mb-4 blog-item"
+                data-title="<%= blog.title.toLowerCase() %>"
+                data-author="<%= blog.author.toLowerCase() %>"
+                data-category="<%= blog.category.toLowerCase() %>"
+                data-tags="<%= blog.tags.toLowerCase() %>">
+
+                <div class="blog-card">
+
+                    <img src="<%= blog.image %>" class="blog-img" alt="blog">
+
+                    <div class="blog-content">
+
+                        <div class="blog-title"><%= blog.title %></div>
+
+                        <div class="blog-meta-row">
+                            <span class="meta-chip"><%= blog.author %></span>
+                            <span class="meta-chip"><%= blog.category %></span>
+                            <span class="meta-chip"><%= blog.publishDate %></span>
+                        </div>
+
+                        <div class="blog-desc">
+                            <%= blog.shortDesc %>
+                        </div>
+
+                        <div class="blog-actions">
+                            <a href="/blog/single-view/<%= blog._id %>" class="view-btn">Read</a>
+                            <a href="/blog/edit-blog/<%= blog._id %>" class="edit-btn">Edit</a>
+                            <a href="/blog/delete-blog/<%= blog._id %>" class="delete-btn">Delete</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+
+        </div>
+    </div>
+</div>
+
+<%- include('../footer') %>
+
+<script>
+    // Filter functionality
+    function filterBlogs() {
+        const searchTerm = document.getElementById('blogSearch').value.toLowerCase();
+        const categoryFilter = document.getElementById('categoryFilter').value.toLowerCase();
+        const authorFilter = document.getElementById('authorFilter').value.toLowerCase();
+
+        const blogItems = document.querySelectorAll('.blog-item');
+
+        blogItems.forEach(item => {
+            const title = item.getAttribute('data-title');
+            const author = item.getAttribute('data-author');
+            const category = item.getAttribute('data-category');
+            const tags = item.getAttribute('data-tags');
+
+            // Check if item matches all filters
+            const matchesSearch = !searchTerm ||
+                title.includes(searchTerm) ||
+                author.includes(searchTerm) ||
+                category.includes(searchTerm) ||
+                tags.includes(searchTerm);
+
+            const matchesCategory = !categoryFilter || category === categoryFilter;
+            const matchesAuthor = !authorFilter || author === authorFilter;
+
+            if (matchesSearch && matchesCategory && matchesAuthor) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // Add event listeners
+    document.getElementById('blogSearch').addEventListener('input', filterBlogs);
+    document.getElementById('categoryFilter').addEventListener('change', filterBlogs);
+    document.getElementById('authorFilter').addEventListener('change', filterBlogs);
+</script>

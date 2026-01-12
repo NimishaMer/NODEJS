@@ -1,0 +1,137 @@
+<%- include('../header')%>
+
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">Edit Blog</h4>
+                    <div class="ml-auto text-right">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Edit Blog</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <form class="form-horizontal" method="post" action="/blog/update-blog/<%= blog._id %>"
+                            enctype="multipart/form-data">
+
+                            <div class="card-body">
+                                <h4 class="card-title">Edit Blog</h4>
+
+                                <!-- Blog Title -->
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-right control-label col-form-label">Blog Title</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="title"
+                                            placeholder="Enter Blog Title" value="<%= blog.title %>" required>
+                                    </div>
+                                </div>
+
+                                <!-- Author -->
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-right control-label col-form-label">Author</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="author" placeholder="Author Name"
+                                            value="<%= blog.author %>" required>
+                                    </div>
+                                </div>
+
+                                <!-- Category -->
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-right control-label col-form-label">Category</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="category" required>
+                                            <option value="">Select Category</option>
+                                            <option value="Technology" <%= blog.category === 'Technology' ? 'selected' : '' %>>Technology</option>
+                                            <option value="Education" <%= blog.category === 'Education' ? 'selected' : '' %>>Education</option>
+                                            <option value="Spiritual" <%= blog.category === 'Spiritual' ? 'selected' : '' %>>Spiritual</option>
+                                            <option value="Motivation" <%= blog.category === 'Motivation' ? 'selected' : '' %>>Motivation</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Tags -->
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-right control-label col-form-label">Tags</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="tags"
+                                            placeholder="example: nodejs, express, mongodb" value="<%= blog.tags %>">
+                                    </div>
+                                </div>
+
+                                <!-- Short Description -->
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-right control-label col-form-label">Short
+                                        Description</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" name="shortDesc" rows="3"
+                                            placeholder="Short description of blog"><%= blog.shortDesc %></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Current Image Preview -->
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-right control-label col-form-label">Current Image</label>
+                                    <div class="col-sm-9">
+                                        <img src="<%= blog.image %>" alt="Current Blog Image" style="max-width: 200px; max-height: 150px; border-radius: 8px; border: 1px solid #ddd;">
+                                    </div>
+                                </div>
+
+                                <!-- Featured Image -->
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-right control-label col-form-label">Change
+                                        Image</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" class="form-control" name="image">
+                                        <small class="form-text text-muted">Leave empty to keep current image</small>
+                                    </div>
+                                </div>
+
+                                <!-- Publish Date -->
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-right control-label col-form-label">Publish Date</label>
+                                    <div class="col-sm-9">
+                                        <input type="date" class="form-control" name="publishDate" value="<%= blog.publishDate %>">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="border-top">
+                                <div class="card-body text-right">
+                                    <button type="submit" class="btn btn-success">Update Blog</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../footer')%>

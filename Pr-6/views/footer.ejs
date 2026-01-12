@@ -1,0 +1,70 @@
+<!-- footer -->
+<!-- ============================================================== -->
+<footer class="footer text-center">
+  All Rights Reserved by Matrix-admin. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
+</footer>
+<!-- ============================================================== -->
+<!-- End footer -->
+<!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/dist/js/jquery.ui.touch-punch-improved.js"></script>
+<script src="/dist/js/jquery-ui.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+<script src="/assets/extra-libs/sparkline/sparkline.js"></script>
+<!--Wave Effects -->
+<script src="/dist/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/dist/js/sidebarmenu.js"></script>
+<!--Custom JavaScript -->
+<script src="/dist/js/custom.min.js"></script>
+<!-- this page js -->
+<script src="/assets/libs/moment/min/moment.min.js"></script>
+<script src="/assets/libs/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="/dist/js/pages/calendar/cal-init.js"></script>
+
+<!-- Search Script -->
+<script>
+  const searchInput = document.getElementById("blogSearch");
+  const blogs = document.querySelectorAll(".blog-item");
+
+  searchInput.addEventListener("keyup", function () {
+    const value = this.value.toLowerCase();
+
+    blogs.forEach(blog => {
+      const title = blog.dataset.title;
+      const author = blog.dataset.author;
+      const category = blog.dataset.category;
+      const tags = blog.dataset.tags;
+
+      if (
+        title.includes(value) ||
+        author.includes(value) ||
+        category.includes(value) ||
+        tags.includes(value)
+      ) {
+        blog.style.display = "block";
+      } else {
+        blog.style.display = "none";
+      }
+    });
+  });
+</script>
+
+</body>
+
+</html>
