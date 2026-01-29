@@ -1,0 +1,234 @@
+<%- include('../header') %>
+
+    <style>
+        .search-box {
+            max-width: 420px;
+        }
+
+        .search-input {
+            border-radius: 30px;
+            padding: 12px 20px;
+            font-size: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.25);
+        }
+
+        .admin-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .admin-card-head {
+            height: 88px;
+            background: var(--info);
+        }
+
+        .admin-card-body {
+            padding: 0 18px 16px;
+            text-align: center;
+        }
+
+        .admin-avatar {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: -46px;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+            background: #f5f5f5;
+        }
+
+        .admin-name {
+            margin: 10px 0 2px;
+            font-weight: 800;
+            font-size: 18px;
+            color: #111;
+        }
+
+        .admin-role {
+            font-size: 13px;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .admin-social {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 10px 0 12px;
+        }
+
+        .admin-social a {
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(41, 98, 255, 0.12);
+            color: var(--info);
+            text-decoration: none;
+        }
+
+        .admin-social a i {
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .admin-social a:hover {
+            background: rgba(41, 98, 255, 0.2);
+            color: var(--info);
+        }
+
+        .admin-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 8px 0 12px;
+        }
+
+        .admin-actions .btn {
+            border-radius: 999px;
+            font-weight: 700;
+            padding: 8px 12px;
+        }
+
+        .admin-btn-primary {
+            background: var(--info);
+            border-color: var(--info);
+            color: #fff;
+        }
+
+        .admin-btn-primary:hover {
+            background: #0041f5;
+            border-color: #0041f5;
+            color: #fff;
+        }
+
+        .admin-btn-outline {
+            background: #fff;
+            border: 2px solid rgba(41, 98, 255, 0.35);
+            color: var(--info);
+        }
+
+        .admin-btn-outline:hover {
+            background: rgba(41, 98, 255, 0.08);
+            border-color: rgba(41, 98, 255, 0.45);
+            color: var(--info);
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            padding-top: 10px;
+            margin-top: 6px;
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .admin-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .admin-stat b {
+            color: #111;
+            font-size: 13px;
+        }
+
+        .admin-delete {
+            margin-top: 12px;
+        }
+
+        .admin-delete .btn {
+            border-radius: 999px;
+            font-weight: 700;
+            padding: 8px 12px;
+        }
+    </style>
+
+
+    <div class="page-wrapper">
+
+        <div class="page-breadcrumb">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <h4 class="page-title mb-3">Admin</h4>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <% admins.forEach((admi, i)=> { %>
+                    <div class="col-md-4 mb-4 blog-card" data-title="<%= String((admi.fname || '') + ' ' + (admi.lname || '')).toLowerCase() %>"
+                        data-author="<%= String(admi.email || '').toLowerCase() %>"
+                        data-category="<%= String(admi.role || '').toLowerCase() %>"
+                        data-tags="<%= String(admi.number || '').toLowerCase() %>">
+
+                        <div class="admin-card">
+                            <div class="admin-card-head"></div>
+                            <div class="admin-card-body">
+                                <img src="<%= admi.adminImage ? admi.adminImage : '/assets/images/users/default.png' %>" class="admin-avatar" alt="Admin">
+
+                                <div class="admin-name">
+                                    <%= admi.fname %> <%= admi.lname %>
+                                </div>
+                                <div class="admin-role">
+                                    <%= admi.role %>
+                                </div>
+
+                                <div class="admin-social">
+                                    <a href="javascript:void(0)" aria-label="facebook"><i class="ti-facebook"></i></a>
+                                    <a href="javascript:void(0)" aria-label="instagram"><i class="ti-instagram"></i></a>
+                                    <a href="javascript:void(0)" aria-label="youtube"><i class="ti-youtube"></i></a>
+                                </div>
+
+                                <div class="admin-actions">
+                                    <a href="/admin/single-view/<%= admi.id %>" class="btn admin-btn-primary">View</a>
+                                    <a href="/admin/edit-admin/<%= admi.id %>" class="btn admin-btn-outline">Edit</a>
+                                </div>
+
+                                <div class="admin-stats">
+                                    <div class="admin-stat">
+                                        <span>Email</span>
+                                        <b><%= admi.email %></b>
+                                    </div>
+                                    <div class="admin-stat">
+                                        <span>Number</span>
+                                        <b><%= admi.number %></b>
+                                    </div>
+                                    <div class="admin-stat">
+                                        <span>Join Date</span>
+                                        <b><%= admi.Join_date %></b>
+                                    </div>
+                                </div>
+
+                                <div class="admin-delete">
+                                    <a href="/admin/delete-admin/<%= admi.id %>" class="btn btn-danger btn-block" onclick="return confirm(' Are you sure?')">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <% }) %>
+
+        </div>
+    </div>
+    </div>
+    <%- include('../footer') %>
+
+    

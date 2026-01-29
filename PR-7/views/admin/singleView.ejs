@@ -1,0 +1,131 @@
+<%- include('../header') %>
+
+    <style>
+        .single-admin-card {
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+            border: 0;
+            background: #fff;
+        }
+
+        .single-admin-head {
+            background: var(--info);
+            color: #fff;
+            padding: 16px 18px;
+        }
+
+        .single-admin-head h4 {
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+        }
+
+        .single-admin-body {
+            padding: 18px;
+        }
+
+        .single-admin-media {
+            width: 100%;
+            height: 280px;
+            border-radius: 16px;
+            object-fit: cover;
+            background: #f5f5f5;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .single-admin-title {
+            font-weight: 900;
+            font-size: 20px;
+            margin: 0 0 10px;
+            color: #111;
+            text-transform: capitalize;
+        }
+
+        .single-admin-meta {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px 14px;
+            color: #6c757d;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .single-admin-meta b {
+            color: #111;
+        }
+
+        .single-admin-desc {
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            margin-top: 14px;
+            padding-top: 14px;
+        }
+
+        .single-admin-actions {
+            padding: 14px 18px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            display: flex;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .single-admin-actions .btn {
+            border-radius: 999px;
+            padding: 10px 26px;
+            font-weight: 800;
+        }
+
+        @media (max-width: 768px) {
+            .single-admin-media {
+                height: 220px;
+            }
+
+            .single-admin-meta {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-xl-9">
+                    <div class="card single-admin-card">
+                        <div class="single-admin-head">
+                            <h4 class="text-center">Admin Details</h4>
+                        </div>
+
+                        <div class="single-admin-body">
+                            <div class="row">
+                                <div class="col-lg-5 mb-3 mb-lg-0">
+                                    <img src="<%= admin.adminImage ? admin.adminImage : '/assets/images/users/default.png' %>" class="single-admin-media" alt="Admin">
+                                </div>
+
+                                <div class="col-lg-7">
+                                    <div class="single-admin-title"><%= admin.fname %> <%= admin.lname %></div>
+
+                                    <div class="single-admin-meta">
+                                        <div><b>Role:</b> <%= admin.role %></div>
+                                        <div><b>Email:</b> <%= admin.email %></div>
+                                        <div><b>Number:</b> +91 <%= admin.number %></div>
+                                        <div><b>Joined Date:</b> <%= admin.join_date ? admin.join_date.toISOString().split('T')[0] : 'N/A' %></div>
+                                    </div>
+
+                                    <div class="single-admin-desc">
+                                        <h5 class="mb-2">Description</h5>
+                                        <p class="mb-0"><%= admin.description %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-admin-actions">
+                            <a href="/admin/view-admin" class="btn btn-info">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../footer') %>
