@@ -1,0 +1,47 @@
+<%- include('../header') %>
+
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">View Sub Category</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Sub Category</th>
+                                <th>Status</th>
+                                <th style="width: 160px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (subCategories && subCategories.length) { %>
+                                <% subCategories.forEach((s) => { %>
+                                    <tr>
+                                        <td><%= s.category ? s.category.name : '' %></td>
+                                        <td><%= s.name %></td>
+                                        <td><%= s.status %></td>
+                                        <td>
+                                            <a href="/sub-category/edit-sub-category/<%= s._id %>" class="btn btn-sm btn-info">Edit</a>
+                                            <a href="/sub-category/delete-sub-category/<%= s._id %>" class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../footer') %>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mer Fashion - Online Shopping</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">
+    <link href="/assets/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Mierb', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f9f9f9;
+            color: #333;
+        }
+        .top-header {
+            background: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .logo {
+            font-size: 36px;
+            font-weight: 600;
+            color: #9c27b0;
+            text-decoration: none;
+            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: -1px;
+            white-space: nowrap;
+        }
+        .logo:hover { color: #7b1fa2; text-decoration: none; }
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 450px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+            background: #fff;
+        }
+        .search-box input:focus { border-color: #9c27b0; }
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 14px;
+        }
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .header-nav-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .header-nav-link:hover { color: #9c27b0; }
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .header-icon-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .header-icon-link:hover { color: #9c27b0; text-decoration: none; }
+        .header-icon-link i { font-size: 20px; }
+        .category-nav {
+            background: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .category-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 25px;
+            padding: 0 15px;
+            scrollbar-width: none;
+        }
+        .category-scroll::-webkit-scrollbar { display: none; }
+        .category-item {
+            text-align: center;
+            min-width: 80px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .category-item:hover { transform: scale(1.05); }
+        .category-item img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 8px;
+            border: 2px solid #f0f0f0;
+        }
+        .category-item i {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 8px;
+            background: #f5f5f5;
+            color: #9c27b0;
+        }
+        .category-item span {
+            display: block;
+            font-weight: 500;
+            color: #333;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .text-category-nav {
+            background: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 0;
+        }
+        .text-category-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 30px;
+            padding: 0 15px;
+            scrollbar-width: none;
+            white-space: nowrap;
+        }
+        .text-category-scroll::-webkit-scrollbar { display: none; }
+        .text-category-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            white-space: nowrap;
+            transition: color 0.3s;
+        }
+        .text-category-item:hover {
+            color: #9c27b0;
+            text-decoration: none;
+        }
+        .main-content {
+            max-width: 1400px;
+ 
+          
+        }
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+        .trust-badge i { color: #9c27b0; font-size: 18px; }
+        .banner-section {
+            background: linear-gradient(135deg, #9c27b0 0%, #e91e63 100%);
+            border-radius: 12px;
+            padding: 40px;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid #e8e8e8;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .product-img-wrapper {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            padding: 15px;
+        }
+        .product-img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        .product-info { padding: 15px; }
+        .product-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+        .original-price {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 8px;
+        }
+        .discount {
+            color: #388e3c;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        .add-to-cart-btn {
+            background: #9c27b0;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+            margin-top: 10px;
+            border-radius: 0 0 8px 8px;
+        }
+        .add-to-cart-btn:hover { background: #7b1fa2; }
+        @media (max-width: 768px) {
+            .search-box { margin: 10px; max-width: none; }
+            .category-item { min-width: 60px; }
+            .category-item i, .category-item img { width: 50px; height: 50px; font-size: 20px; }
+            .trust-badges { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-header">
+        <div class="container">
+            <div class="header-container">
+                <a href="/website" class="logo">merfashion</a>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="Try Saree, Kurti or Search by Product Code">
+                </div>
+                <div class="header-nav">
+                    <a href="/" class="header-nav-link">Become a Supplier</a>
+                    <a href="/" class="header-nav-link">Investor Relations</a>
+                </div>
+                <div class="header-icons">
+                    <a href="/" class="header-icon-link">
+                        <i class="far fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="javascript:void(0)" class="header-icon-link" onclick="openCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-category-nav">
+        <div class="text-category-scroll">
+            <a href="/website" class="text-category-item">Popular</a>
+            <a href="/website" class="text-category-item">Kurti, Saree & Lehnga</a>
+            <a href="/website" class="text-category-item">Women Western</a>
+            <a href="/website" class="text-category-item">Lingerie</a>
+            <a href="/website" class="text-category-item">Men</a>
+            <a href="/website" class="text-category-item">Kids & Toys</a>
+            <a href="/website" class="text-category-item">Home & Kitchen</a>
+            <a href="/website" class="text-category-item">Beauty & Health</a>
+            <a href="/website" class="text-category-item">Jewellery & Accessories</a>
+            <a href="/website" class="text-category-item">Bags & Footwear</a>
+            <a href="/website" class="text-category-item">Electronics</a>
+            <a href="/website" class="text-category-item">Watches</a>
+            <a href="/website" class="text-category-item">Sports & Fitness</a>
+            <a href="/website" class="text-category-item">Car & Motorbike</a>
+            <a href="/website" class="text-category-item">Office Supplies</a>
+        </div>
+    </div>

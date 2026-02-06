@@ -1,0 +1,259 @@
+<%- include("header") %>
+
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-10 col-xl-9">
+                    <div class="profile-shell">
+                        <div class="profile-hero">
+                            <div class="profile-hero-left">
+                                <img src="<%= (admin && admin.adminImage) ? admin.adminImage : '/images/default-user.png' %>" class="profile-avatar" alt="Profile">
+                                <div class="profile-hero-title">
+                                    <div class="profile-name"><%= (admin && admin.fname) ? admin.fname : '' %> <%= (admin && admin.lname) ? admin.lname : '' %></div>
+                                    <div class="profile-sub">
+                                        <span class="profile-pill"><%= (admin && admin.role) ? admin.role : 'admin' %></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile-hero-mid">
+                                <div class="profile-hero-line">
+                                    <i class="mdi mdi-email-outline"></i>
+                                    <span><%= (admin && admin.email) ? admin.email : 'Not Added' %></span>
+                                </div>
+                                <div class="profile-hero-line">
+                                    <i class="mdi mdi-phone"></i>
+                                    <span><%= (admin && admin.number) ? admin.number : 'Not Added' %></span>
+                                </div>
+                            </div>
+
+                            <div class="profile-hero-right">
+                                <a href="<%= (admin && admin._id) ? ('/admin/edit-admin/' + admin._id) : 'javascript:void(0)' %>" class="btn profile-edit-btn">Edit</a>
+                                <a href="/dashboard" class="btn profile-back-btn">Back</a>
+                            </div>
+                        </div>
+
+                        <div class="profile-body">
+                            <h5 class="profile-section-title">Personal Information</h5>
+
+                            <div class="profile-grid">
+                                <div class="profile-field">
+                                    <div class="profile-label">First Name</div>
+                                    <div class="profile-value"><%= (admin && admin.fname) ? admin.fname : '' %></div>
+                                </div>
+
+                                <div class="profile-field">
+                                    <div class="profile-label">Last Name</div>
+                                    <div class="profile-value"><%= (admin && admin.lname) ? admin.lname : '' %></div>
+                                </div>
+
+                                <div class="profile-field">
+                                    <div class="profile-label">Email</div>
+                                    <div class="profile-value"><%= (admin && admin.email) ? admin.email : 'Not Added' %></div>
+                                </div>
+
+                                <div class="profile-field">
+                                    <div class="profile-label">Your phone number</div>
+                                    <div class="profile-value"><%= (admin && admin.number) ? admin.number : 'Not Added' %></div>
+                                </div>
+
+                                <div class="profile-field">
+                                    <div class="profile-label">Role</div>
+                                    <div class="profile-value"><%= (admin && admin.role) ? admin.role : 'admin' %></div>
+                                </div>
+
+                                <div class="profile-field">
+                                    <div class="profile-label">Joined On</div>
+                                    <div class="profile-value"><%= (admin && admin.Join_date) ? admin.Join_date : 'Not Added' %></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        :root {
+            --profile-green: var(--info);
+            --profile-green-dark: #727272;
+            --profile-soft: rgba(41, 98, 255, 0.12);
+        }
+
+        .profile-shell {
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .profile-hero {
+            background: var(--profile-green);
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .profile-hero-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 240px;
+        }
+
+        .profile-avatar {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .profile-name {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 1.2;
+        }
+
+        .profile-pill {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: lowercase;
+        }
+
+        .profile-hero-mid {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+        }
+
+        .profile-hero-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .profile-hero-line i {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        .profile-hero-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-edit-btn {
+            background: #ffffff;
+            color: var(--profile-green);
+            border-radius: 6px;
+            padding: 6px 18px;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .profile-edit-btn:hover {
+            background: #f7f9ff;
+            color: var(--profile-green-dark);
+        }
+
+        .profile-back-btn {
+            background: var(--profile-green-dark);
+            color: #ffffff;
+            border-radius: 6px;
+            padding: 6px 18px;
+            font-weight: 700;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .profile-back-btn:hover {
+            background: var(--profile-green);
+            color: #ffffff;
+        }
+
+        .profile-body {
+            padding: 14px;
+        }
+
+        .profile-section-title {
+            margin: 0 0 14px;
+            font-weight: 700;
+            color: #1f1f1f;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .profile-field {
+            background: var(--profile-soft);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+
+        .profile-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #2a2a2a;
+            margin-bottom: 6px;
+        }
+
+        .profile-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111;
+        }
+
+        @media (max-width: 992px) {
+            .profile-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .profile-hero {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .profile-hero-right {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <%- include("footer") %>

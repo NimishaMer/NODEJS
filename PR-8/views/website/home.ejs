@@ -1,0 +1,347 @@
+<%- include('./header') %>
+
+<style>
+.hero-banner img {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Side Cart Styles */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    display: none;
+}
+.cart-overlay.active {
+    display: block;
+}
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100%;
+    background: #fff;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+}
+.cart-drawer.active {
+    right: 0;
+}
+.cart-header {
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cart-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+.cart-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+.cart-body {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+.cart-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.cart-item-info {
+    flex: 1;
+}
+.cart-item-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.cart-item-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #9c27b0;
+}
+.cart-quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+.cart-quantity button {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+.checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background: #9c27b0;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.empty-cart {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+.empty-cart i {
+    font-size: 60px;
+    margin-bottom: 15px;
+    color: #ccc;
+}
+</style>
+
+<section class="hero-banner">
+  <img
+    src="/assets/images/background/image.png"
+    alt="Banner"
+  >
+</section>
+
+<%
+const demoProducts = [
+    { id: 1, name: 'Classic Oversized Tee', price: 699, originalPrice: 999, discount: 30, productImage: '/assets/images/users/1.png' },
+    { id: 2, name: 'Relaxed Fit Jeans', price: 1499, originalPrice: 2199, discount: 32, productImage: '/assets/images/users/2.png' },
+    { id: 3, name: 'Minimal Hoodie', price: 1299, originalPrice: 1799, discount: 28, productImage: '/assets/images/users/3.png' },
+    { id: 4, name: 'Streetwear Sneakers', price: 2999, originalPrice: 4499, discount: 33, productImage: '/assets/images/users/profile.png' },
+    { id: 5, name: 'Summer Dress', price: 899, originalPrice: 1299, discount: 31, productImage: '/assets/images/users/4.png' },
+    { id: 6, name: 'Cotton Kurti', price: 799, originalPrice: 1199, discount: 33, productImage: '/assets/images/users/5.png' },
+    { id: 7, name: 'Denim Jacket', price: 1999, originalPrice: 2999, discount: 33, productImage: '/assets/images/users/6.png' },
+    { id: 8, name: 'Running Shoes', price: 2499, originalPrice: 3999, discount: 38, productImage: '/assets/images/users/7.png' }
+];
+
+const list = (typeof products !== 'undefined' && products && products.length) ? products : demoProducts;
+const toCurrency = (val) => `₹${Number(val).toLocaleString('en-IN')}`;
+%>
+
+<!-- Products Section -->
+<div class="container" style="padding: 20px 15px;">
+    <h2 style="font-size: 24px; font-weight: 700; color: #333; margin-bottom: 25px; text-align: center;">Products For You</h2>
+    <div class="row">
+        <% list.forEach((p) => { %>
+            <div class="col-6 col-md-4 col-lg-3" style="margin-bottom: 20px;">
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <img src="<%= p.productImage || '/assets/images/users/profile.png' %>" alt="<%= p.name %>" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title"><%= p.name %></div>
+                        <div class="product-price">
+                            <%= toCurrency(p.price) %>
+                            <span class="original-price"><%= toCurrency(p.originalPrice || p.price * 1.4) %></span>
+                        </div>
+                        <div class="discount"><%= p.discount || 30 %>% off</div>
+                    </div>
+                    <button class="add-to-cart-btn" data-id="<%= p.id %>" data-name="<%= encodeURIComponent(p.name) %>" data-price="<%= p.price %>" data-image="<%= p.productImage %>" onclick="addToCart(this.dataset.id, decodeURIComponent(this.dataset.name), Number(this.dataset.price), this.dataset.image)">Add to Cart</button>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<!-- Cart Overlay -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- Side Cart Drawer -->
+<div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+        <h3>My Cart</h3>
+        <button class="cart-close" onclick="closeCart()">&times;</button>
+    </div>
+    <div class="cart-body" id="cartBody">
+        <div class="empty-cart">
+            <i class="fas fa-shopping-cart"></i>
+            <p>Your cart is empty</p>
+        </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cartTotal">₹0</span>
+        </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+</div>
+
+<script>
+let cart = [];
+
+// Load cart from MongoDB on page load
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadCart();
+});
+
+async function loadCart() {
+    try {
+        const response = await fetch('/website/api/cart', {
+            credentials: 'include'
+        });
+        const data = await response.json();
+        cart = data.items.map(item => ({
+            id: item.productId,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            quantity: item.quantity
+        }));
+        updateCartUI();
+    } catch (error) {
+        console.error('Failed to load cart:', error);
+    }
+}
+
+async function saveCartToDB() {
+    try {
+        const items = cart.map(item => ({
+            productId: item.id,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            quantity: item.quantity
+        }));
+        
+        await fetch('/website/api/cart/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ items })
+        });
+    } catch (error) {
+        console.error('Failed to save cart:', error);
+    }
+}
+
+function addToCart(id, name, price, image) {
+    const existingItem = cart.find(item => item.id === id);
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        cart.push({ id, name, price, image, quantity: 1 });
+    }
+    updateCartUI();
+    saveCartToDB();
+    openCart();
+}
+
+function removeFromCart(id) {
+    cart = cart.filter(item => item.id !== id);
+    updateCartUI();
+    saveCartToDB();
+}
+
+function updateQuantity(id, change) {
+    const item = cart.find(item => item.id === id);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            removeFromCart(id);
+        } else {
+            updateCartUI();
+            saveCartToDB();
+        }
+    }
+}
+
+function updateCartUI() {
+    const cartBody = document.getElementById('cartBody');
+    const cartFooter = document.getElementById('cartFooter');
+    const cartTotal = document.getElementById('cartTotal');
+    
+    if (cart.length === 0) {
+        cartBody.innerHTML = `
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+            </div>
+        `;
+        cartFooter.style.display = 'none';
+    } else {
+        let total = 0;
+        cartBody.innerHTML = cart.map(item => {
+            total += item.price * item.quantity;
+            return `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</div>
+                        <div class="cart-quantity">
+                            <button onclick="updateQuantity('${item.id}', -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart('${item.id}')" style="background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 18px;">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+        }).join('');
+        cartFooter.style.display = 'block';
+        cartTotal.textContent = `₹${total.toLocaleString('en-IN')}`;
+    }
+}
+
+function openCart() {
+    document.getElementById('cartOverlay').classList.add('active');
+    document.getElementById('cartDrawer').classList.add('active');
+}
+
+function closeCart() {
+    document.getElementById('cartOverlay').classList.remove('active');
+    document.getElementById('cartDrawer').classList.remove('active');
+}
+
+// Close cart when scrolling down
+document.addEventListener('scroll', function() {
+    const cartDrawer = document.getElementById('cartDrawer');
+    if (cartDrawer.classList.contains('active')) {
+        closeCart();
+    }
+});
+</script>
+
+<%- include('./footer') %>

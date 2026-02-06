@@ -1,0 +1,181 @@
+<%- include('../header') %>
+        <style>
+            .blog-add-card {
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+                border: 0;
+            }
+
+            .blog-add-header {
+                background: var(--info);
+                color: #fff;
+                padding: 16px 18px;
+            }
+
+            .blog-add-header h4 {
+                margin: 0;
+                font-weight: 800;
+                letter-spacing: 0.2px;
+            }
+
+            .blog-add-body {
+                padding: 20px 18px;
+            }
+
+            .blog-add-card .form-control {
+                border-radius: 10px;
+                height: 44px;
+            }
+
+            .blog-add-actions {
+                padding: 16px 18px;
+                background: #fff;
+            }
+
+            .blog-add-actions .btn {
+                border-radius: 999px;
+                padding: 10px 26px;
+                font-weight: 800;
+            }
+        </style>
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">Add Blog</h4>
+                        <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-9 col-lg-8 col-xl-7">
+                        <div class="card blog-add-card">
+                            <div class="blog-add-header">
+                                <h4 class="d-flex justify-content-center">Blog Add</h4>
+                            </div>
+                            <form class="form-horizontal" action="/blog/add-blog" method="post" enctype="multipart/form-data">
+                                <div class="card-body blog-add-body">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-right control-label col-form-label">Title</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="title" placeholder="Enter Blog Title" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-right control-label col-form-label">Author</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="author" placeholder="Author Name" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-right control-label col-form-label">Category</label>
+                                        <div class="col-sm-9">
+                                        <select class="form-control" name="category">
+                                            <option>Select Category</option>
+                                            <option>Technology</option>
+                                            <option>Education</option>
+                                            <option>Travel</option>
+                                            <option>Food</option>
+                                        </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-right control-label col-form-label">Status</label>
+                                        <div class="col-md-9 d-flex">
+                                            <div class="custom-control custom-radio me-3">
+                                                <input type="radio" class="custom-control-input" name="status" value="publish" id="publish"  required>
+                                                <label class="custom-control-label" for="publish">Publish</label>
+                                            </div>
+                                            <div class="custom-control custom-radio mx-3">
+                                                <input type="radio" class="custom-control-input" name="status" value="draft" id="draft"  required>
+                                                <label class="custom-control-label" for="draft">Draft</label>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-right control-label col-form-label">Tags</label>
+                                        <div class="col-md-9 d-flex">
+                                            <div class="custom-control custom-checkbox mr-sm-2 me-3">
+                                                <input type="checkbox" class="custom-control-input" name="tags[]" value="ReactJS" id="react" >
+                                                <label class="custom-control-label" for="react">ReactJS</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mr-sm-2 me-3">
+                                                <input type="checkbox" class="custom-control-input" name="tags[]" value="Python" id="python">
+                                                <label class="custom-control-label" for="python">Python</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mr-sm-2 me-3">
+                                                <input type="checkbox" class="custom-control-input" name="tags[]" value="AWS" id="aws">
+                                                <label class="custom-control-label" for="aws">AWS</label>
+                                            </div>
+                                        </div>
+                                    </div>            
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-right control-label col-form-label">Publish Date</label>
+                                        <div class="col-sm-9">
+                                            <input type="date" class="form-control" name="publish_date" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-right control-label col-form-label">File Upload</label>
+                                        <div class="col-md-9">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="blogImage" id="blogImage" required>
+                                                <label class="custom-file-label" for="blogImage">Choose file...</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-top">
+                                    <div class="card-body d-flex justify-content-center blog-add-actions">
+                                        <button type="submit" class="btn btn-info">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+       </div>
+<%- include('../footer') %>

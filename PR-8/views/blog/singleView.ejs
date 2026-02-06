@@ -1,0 +1,151 @@
+<%- include('../header') %>
+
+    <style>
+        .single-blog-card {
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+            border: 0;
+            background: #fff;
+        }
+
+        .single-blog-head {
+            background: var(--info);
+            color: #fff;
+            padding: 16px 18px;
+        }
+
+        .single-blog-head h4 {
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+        }
+
+        .single-blog-body {
+            padding: 18px;
+        }
+
+        .single-blog-media {
+            width: 100%;
+            height: 280px;
+            border-radius: 16px;
+            object-fit: cover;
+            background: #f5f5f5;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .single-blog-title {
+            font-weight: 900;
+            font-size: 20px;
+            margin: 0 0 10px;
+            color: #111;
+        }
+
+        .single-blog-meta {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px 14px;
+            color: #6c757d;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .single-blog-meta b {
+            color: #111;
+        }
+
+        .single-blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .single-blog-tags .badge {
+            border-radius: 999px;
+            padding: 6px 10px;
+            font-weight: 700;
+        }
+
+        .single-blog-desc {
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            margin-top: 14px;
+            padding-top: 14px;
+        }
+
+        .single-blog-actions {
+            padding: 14px 18px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            display: flex;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .single-blog-actions .btn {
+            border-radius: 999px;
+            padding: 10px 26px;
+            font-weight: 800;
+        }
+
+        @media (max-width: 768px) {
+            .single-blog-media {
+                height: 220px;
+            }
+
+            .single-blog-meta {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-xl-9">
+                    <div class="card single-blog-card">
+                        <div class="single-blog-head">
+                            <h4 class="text-center">Blog Details</h4>
+                        </div>
+
+                        <div class="single-blog-body">
+                            <div class="row">
+                                <div class="col-lg-5 mb-3 mb-lg-0">
+                                    <img src="<%= blog.blogImage %>" class="single-blog-media" alt="Blog">
+                                </div>
+
+                                <div class="col-lg-7">
+                                    <div class="single-blog-title"><%= blog.title %></div>
+
+                                    <div class="single-blog-meta">
+                                        <div><b>Author:</b> <%= blog.author %></div>
+                                        <div><b>Category:</b> <%= blog.category %></div>
+                                        <div><b>Status:</b>
+                                            <span class="badge <%= blog.status === 'publish' ? 'badge-success' : 'badge-warning' %>"><%= blog.status %></span>
+                                        </div>
+                                        <div><b>Publish Date:</b> <%= blog.publish_date ? new Date(blog.publish_date).toLocaleDateString() : '' %></div>
+                                    </div>
+
+                                    <div class="mb-2"><b>Tags:</b></div>
+                                    <div class="single-blog-tags">
+                                        <% (Array.isArray(blog.tags) ? blog.tags : (blog.tags ? [blog.tags] : [])).forEach((t)=> { %>
+                                            <span class="badge badge-light"><%= t %></span>
+                                        <% }) %>
+                                    </div>
+
+                                    <div class="single-blog-desc">
+                                        <h5 class="mb-2">Description</h5>
+                                        <p class="mb-0"><%= blog.description %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-blog-actions">
+                            <a href="/blog/view-blog" class="btn btn-info">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<%- include('../footer') %>
